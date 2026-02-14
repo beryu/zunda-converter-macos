@@ -1,0 +1,45 @@
+name: ZundaConverter
+options:
+  bundleIdPrefix: com.beryu
+  deploymentTarget:
+    macOS: "13.0"
+  xcodeVersion: "16.0"
+  generateEmptyDirectories: true
+
+targets:
+  ZundaConverter:
+    type: application
+    platform: macOS
+    sources:
+      - path: ZundaConverter
+        excludes:
+          - "Resources/Assets.xcassets"
+    resources:
+      - path: ZundaConverter/Resources/Assets.xcassets
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.beryu.ZundaConverter
+        PRODUCT_NAME: ZundaConverter
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: 1
+        MACOSX_DEPLOYMENT_TARGET: "13.0"
+        SWIFT_VERSION: "5.9"
+        INFOPLIST_FILE: ZundaConverter/Resources/Info.plist
+        CODE_SIGN_ENTITLEMENTS: ZundaConverter/Resources/ZundaConverter.entitlements
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ENABLE_HARDENED_RUNTIME: YES
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: NO
+
+  ZundaConverterTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: ZundaConverterTests
+    dependencies:
+      - target: ZundaConverter
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.beryu.ZundaConverterTests
+        SWIFT_VERSION: "5.9"
+        GENERATE_INFOPLIST_FILE: YES

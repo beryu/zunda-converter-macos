@@ -1,0 +1,471 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0999A30365668852257ED19C /* ZundaConverterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E1422115BB2346510AF4DF /* ZundaConverterApp.swift */; };
+		09A635A9C6B731A51F05F6A4 /* RuleBasedConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9203876A0A74A2D4DE5351 /* RuleBasedConverterTests.swift */; };
+		0C30F35CFCAD1C6C609CEE58 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46540E59E2B729EF5CC19FBF /* SettingsStore.swift */; };
+		11CED96A67C628E3DB899442 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61A08815C5A88F16D6E199A /* AppDelegate.swift */; };
+		73248B0035AF0E0D963AB96F /* TextConversionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913C347975F28A65BED7C897 /* TextConversionEngine.swift */; };
+		B113B2C87E3CC49CB2CEBD69 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E21C45AD540607C400897 /* SettingsView.swift */; };
+		B1FEC5EC88423EC3A9ACE733 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36150B43860D4F4875A38E0D /* StatusBarController.swift */; };
+		C7653E0B5654B2280477C0FA /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62ABFD9A652F969534627928 /* ServiceProvider.swift */; };
+		CA33ED6E9010D0D0DCD294B0 /* RuleBasedConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E54D877E0D9B302D936416 /* RuleBasedConverter.swift */; };
+		CBD3B6257D2F953A2E843F80 /* ZundamonRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6620EB49040F624856F3508D /* ZundamonRules.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		128140004EB3BFF7B5E3DD23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3F7B2C8F28414590E5D9BE5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6297B78C3C6E69255EE40272;
+			remoteInfo = ZundaConverter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		36150B43860D4F4875A38E0D /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
+		46540E59E2B729EF5CC19FBF /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		62ABFD9A652F969534627928 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
+		6620EB49040F624856F3508D /* ZundamonRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZundamonRules.swift; sourceTree = "<group>"; };
+		6C7FD4A378012C0295D51589 /* ZundaConverterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZundaConverterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		73E54D877E0D9B302D936416 /* RuleBasedConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBasedConverter.swift; sourceTree = "<group>"; };
+		774A8C2877BAD8CABB7189C4 /* ZundaConverter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZundaConverter.entitlements; sourceTree = "<group>"; };
+		913C347975F28A65BED7C897 /* TextConversionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextConversionEngine.swift; sourceTree = "<group>"; };
+		9D9E21C45AD540607C400897 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B8E1422115BB2346510AF4DF /* ZundaConverterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZundaConverterApp.swift; sourceTree = "<group>"; };
+		BF9203876A0A74A2D4DE5351 /* RuleBasedConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBasedConverterTests.swift; sourceTree = "<group>"; };
+		D5F90777B309EC5A3892C7D3 /* ZundaConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZundaConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E61A08815C5A88F16D6E199A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E732523E266083222AC8940F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		137FACC2D8D60B6AD6A0C4E4 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				73E54D877E0D9B302D936416 /* RuleBasedConverter.swift */,
+				913C347975F28A65BED7C897 /* TextConversionEngine.swift */,
+				6620EB49040F624856F3508D /* ZundamonRules.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		13B47591942D86A362468A26 = {
+			isa = PBXGroup;
+			children = (
+				8AAA0AC5004101D5312FB4C3 /* ZundaConverter */,
+				39B4CB1C0138968531B9B1D9 /* ZundaConverterTests */,
+				F1D757901D839544489EE33F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1E2D41FCB20B661CEB5B9B8D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E732523E266083222AC8940F /* Info.plist */,
+				774A8C2877BAD8CABB7189C4 /* ZundaConverter.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		39B4CB1C0138968531B9B1D9 /* ZundaConverterTests */ = {
+			isa = PBXGroup;
+			children = (
+				BF9203876A0A74A2D4DE5351 /* RuleBasedConverterTests.swift */,
+			);
+			path = ZundaConverterTests;
+			sourceTree = "<group>";
+		};
+		4FC2DFEFD170FAA0C6FD437F /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				62ABFD9A652F969534627928 /* ServiceProvider.swift */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		8AAA0AC5004101D5312FB4C3 /* ZundaConverter */ = {
+			isa = PBXGroup;
+			children = (
+				E822E90177BA67BF4D3B504D /* App */,
+				137FACC2D8D60B6AD6A0C4E4 /* Core */,
+				4FC2DFEFD170FAA0C6FD437F /* Input */,
+				1E2D41FCB20B661CEB5B9B8D /* Resources */,
+				B52951F4713EC3E008E5CBDF /* Settings */,
+			);
+			path = ZundaConverter;
+			sourceTree = "<group>";
+		};
+		B52951F4713EC3E008E5CBDF /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				46540E59E2B729EF5CC19FBF /* SettingsStore.swift */,
+				9D9E21C45AD540607C400897 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		E822E90177BA67BF4D3B504D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				E61A08815C5A88F16D6E199A /* AppDelegate.swift */,
+				36150B43860D4F4875A38E0D /* StatusBarController.swift */,
+				B8E1422115BB2346510AF4DF /* ZundaConverterApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F1D757901D839544489EE33F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D5F90777B309EC5A3892C7D3 /* ZundaConverter.app */,
+				6C7FD4A378012C0295D51589 /* ZundaConverterTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6297B78C3C6E69255EE40272 /* ZundaConverter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 201A36031CB893ECC39A83A5 /* Build configuration list for PBXNativeTarget "ZundaConverter" */;
+			buildPhases = (
+				54E5ACF8A6ADD05A27ED694D /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZundaConverter;
+			productName = ZundaConverter;
+			productReference = D5F90777B309EC5A3892C7D3 /* ZundaConverter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EF80FC25DC637D74D253EFFA /* ZundaConverterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0112661523549B67CCED79C0 /* Build configuration list for PBXNativeTarget "ZundaConverterTests" */;
+			buildPhases = (
+				3C608A2E0953AB1F51F9F743 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3952A71FB4C3CB4FBA9055AA /* PBXTargetDependency */,
+			);
+			name = ZundaConverterTests;
+			productName = ZundaConverterTests;
+			productReference = 6C7FD4A378012C0295D51589 /* ZundaConverterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B3F7B2C8F28414590E5D9BE5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					6297B78C3C6E69255EE40272 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 6951E6005B097FD2EEDD5AC5 /* Build configuration list for PBXProject "ZundaConverter" */;
+			compatibilityVersion = "Xcode 11.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 13B47591942D86A362468A26;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6297B78C3C6E69255EE40272 /* ZundaConverter */,
+				EF80FC25DC637D74D253EFFA /* ZundaConverterTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3C608A2E0953AB1F51F9F743 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09A635A9C6B731A51F05F6A4 /* RuleBasedConverterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		54E5ACF8A6ADD05A27ED694D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11CED96A67C628E3DB899442 /* AppDelegate.swift in Sources */,
+				CA33ED6E9010D0D0DCD294B0 /* RuleBasedConverter.swift in Sources */,
+				C7653E0B5654B2280477C0FA /* ServiceProvider.swift in Sources */,
+				0C30F35CFCAD1C6C609CEE58 /* SettingsStore.swift in Sources */,
+				B113B2C87E3CC49CB2CEBD69 /* SettingsView.swift in Sources */,
+				B1FEC5EC88423EC3A9ACE733 /* StatusBarController.swift in Sources */,
+				73248B0035AF0E0D963AB96F /* TextConversionEngine.swift in Sources */,
+				0999A30365668852257ED19C /* ZundaConverterApp.swift in Sources */,
+				CBD3B6257D2F953A2E843F80 /* ZundamonRules.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3952A71FB4C3CB4FBA9055AA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6297B78C3C6E69255EE40272 /* ZundaConverter */;
+			targetProxy = 128140004EB3BFF7B5E3DD23 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0BB1A1184F19ACE61CFCC625 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2D981C96A20C6EF2E8543FB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		8F5A49070655290B828D2D2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ZundaConverter/Resources/ZundaConverter.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ZundaConverter/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beryu.ZundaConverter;
+				PRODUCT_NAME = ZundaConverter;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		942C924313F567D454063C33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ZundaConverter/Resources/ZundaConverter.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ZundaConverter/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beryu.ZundaConverter;
+				PRODUCT_NAME = ZundaConverter;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		B30E92114943DF2F8A4A02D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.beryu.ZundaConverterTests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZundaConverter.app/Contents/MacOS/ZundaConverter";
+			};
+			name = Release;
+		};
+		FE9BC195454F0D9E8FA0F8D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.beryu.ZundaConverterTests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZundaConverter.app/Contents/MacOS/ZundaConverter";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0112661523549B67CCED79C0 /* Build configuration list for PBXNativeTarget "ZundaConverterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE9BC195454F0D9E8FA0F8D7 /* Debug */,
+				B30E92114943DF2F8A4A02D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		201A36031CB893ECC39A83A5 /* Build configuration list for PBXNativeTarget "ZundaConverter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				942C924313F567D454063C33 /* Debug */,
+				8F5A49070655290B828D2D2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6951E6005B097FD2EEDD5AC5 /* Build configuration list for PBXProject "ZundaConverter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BB1A1184F19ACE61CFCC625 /* Debug */,
+				2D981C96A20C6EF2E8543FB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B3F7B2C8F28414590E5D9BE5 /* Project object */;
+}
