@@ -11,8 +11,15 @@
 		09A635A9C6B731A51F05F6A4 /* RuleBasedConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9203876A0A74A2D4DE5351 /* RuleBasedConverterTests.swift */; };
 		0C30F35CFCAD1C6C609CEE58 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46540E59E2B729EF5CC19FBF /* SettingsStore.swift */; };
 		11CED96A67C628E3DB899442 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61A08815C5A88F16D6E199A /* AppDelegate.swift */; };
+		3D09C8441F56F0DEBCC0C8D1 /* ClipboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781DFAC30E2CB066F01B800 /* ClipboardHelper.swift */; };
+		3F5DE253DDB752E4EA740DC8 /* LLMConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAC37EAE6CE3D49A18B994F /* LLMConverter.swift */; };
 		73248B0035AF0E0D963AB96F /* TextConversionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913C347975F28A65BED7C897 /* TextConversionEngine.swift */; };
+		78908C4E19B00CA1F01B8B09 /* AccessibilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D9D9BF375C7D73C2A3179 /* AccessibilityHelper.swift */; };
+		A7752DD8F1956B4866783946 /* ShortcutRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74D546EEFE5A9F6979AAD6F /* ShortcutRecorderView.swift */; };
+		A9FD519DF5A84A5124A4DD19 /* ModelDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8679A32BC109F2AB63F9B92C /* ModelDownloader.swift */; };
+		ABEEE0A6B1F3696F9DD803E1 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF094D08F9D2E8099735EB07 /* SettingsWindowController.swift */; };
 		B113B2C87E3CC49CB2CEBD69 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E21C45AD540607C400897 /* SettingsView.swift */; };
+		B183DA0E030359F0C946D444 /* ShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA494BF11F1A5757C8E13CE /* ShortcutManager.swift */; };
 		B1FEC5EC88423EC3A9ACE733 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36150B43860D4F4875A38E0D /* StatusBarController.swift */; };
 		C7653E0B5654B2280477C0FA /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62ABFD9A652F969534627928 /* ServiceProvider.swift */; };
 		CA33ED6E9010D0D0DCD294B0 /* RuleBasedConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E54D877E0D9B302D936416 /* RuleBasedConverter.swift */; };
@@ -32,24 +39,33 @@
 /* Begin PBXFileReference section */
 		36150B43860D4F4875A38E0D /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		46540E59E2B729EF5CC19FBF /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		4FAC37EAE6CE3D49A18B994F /* LLMConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMConverter.swift; sourceTree = "<group>"; };
 		62ABFD9A652F969534627928 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
 		6620EB49040F624856F3508D /* ZundamonRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZundamonRules.swift; sourceTree = "<group>"; };
+		6C5D9D9BF375C7D73C2A3179 /* AccessibilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityHelper.swift; sourceTree = "<group>"; };
 		6C7FD4A378012C0295D51589 /* ZundaConverterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZundaConverterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DA494BF11F1A5757C8E13CE /* ShortcutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutManager.swift; sourceTree = "<group>"; };
 		73E54D877E0D9B302D936416 /* RuleBasedConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBasedConverter.swift; sourceTree = "<group>"; };
 		774A8C2877BAD8CABB7189C4 /* ZundaConverter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZundaConverter.entitlements; sourceTree = "<group>"; };
+		8679A32BC109F2AB63F9B92C /* ModelDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDownloader.swift; sourceTree = "<group>"; };
+		8781DFAC30E2CB066F01B800 /* ClipboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHelper.swift; sourceTree = "<group>"; };
 		913C347975F28A65BED7C897 /* TextConversionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextConversionEngine.swift; sourceTree = "<group>"; };
 		9D9E21C45AD540607C400897 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A74D546EEFE5A9F6979AAD6F /* ShortcutRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutRecorderView.swift; sourceTree = "<group>"; };
 		B8E1422115BB2346510AF4DF /* ZundaConverterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZundaConverterApp.swift; sourceTree = "<group>"; };
 		BF9203876A0A74A2D4DE5351 /* RuleBasedConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBasedConverterTests.swift; sourceTree = "<group>"; };
 		D5F90777B309EC5A3892C7D3 /* ZundaConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZundaConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E61A08815C5A88F16D6E199A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E732523E266083222AC8940F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FF094D08F9D2E8099735EB07 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		137FACC2D8D60B6AD6A0C4E4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				4FAC37EAE6CE3D49A18B994F /* LLMConverter.swift */,
+				8679A32BC109F2AB63F9B92C /* ModelDownloader.swift */,
 				73E54D877E0D9B302D936416 /* RuleBasedConverter.swift */,
 				913C347975F28A65BED7C897 /* TextConversionEngine.swift */,
 				6620EB49040F624856F3508D /* ZundamonRules.swift */,
@@ -86,7 +102,10 @@
 		4FC2DFEFD170FAA0C6FD437F /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				6C5D9D9BF375C7D73C2A3179 /* AccessibilityHelper.swift */,
+				8781DFAC30E2CB066F01B800 /* ClipboardHelper.swift */,
 				62ABFD9A652F969534627928 /* ServiceProvider.swift */,
+				6DA494BF11F1A5757C8E13CE /* ShortcutManager.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -108,6 +127,8 @@
 			children = (
 				46540E59E2B729EF5CC19FBF /* SettingsStore.swift */,
 				9D9E21C45AD540607C400897 /* SettingsView.swift */,
+				FF094D08F9D2E8099735EB07 /* SettingsWindowController.swift */,
+				A74D546EEFE5A9F6979AAD6F /* ShortcutRecorderView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -209,11 +230,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78908C4E19B00CA1F01B8B09 /* AccessibilityHelper.swift in Sources */,
 				11CED96A67C628E3DB899442 /* AppDelegate.swift in Sources */,
+				3D09C8441F56F0DEBCC0C8D1 /* ClipboardHelper.swift in Sources */,
+				3F5DE253DDB752E4EA740DC8 /* LLMConverter.swift in Sources */,
+				A9FD519DF5A84A5124A4DD19 /* ModelDownloader.swift in Sources */,
 				CA33ED6E9010D0D0DCD294B0 /* RuleBasedConverter.swift in Sources */,
 				C7653E0B5654B2280477C0FA /* ServiceProvider.swift in Sources */,
 				0C30F35CFCAD1C6C609CEE58 /* SettingsStore.swift in Sources */,
 				B113B2C87E3CC49CB2CEBD69 /* SettingsView.swift in Sources */,
+				ABEEE0A6B1F3696F9DD803E1 /* SettingsWindowController.swift in Sources */,
+				B183DA0E030359F0C946D444 /* ShortcutManager.swift in Sources */,
+				A7752DD8F1956B4866783946 /* ShortcutRecorderView.swift in Sources */,
 				B1FEC5EC88423EC3A9ACE733 /* StatusBarController.swift in Sources */,
 				73248B0035AF0E0D963AB96F /* TextConversionEngine.swift in Sources */,
 				0999A30365668852257ED19C /* ZundaConverterApp.swift in Sources */,
@@ -283,7 +311,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -340,7 +368,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -366,12 +394,12 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.beryu.ZundaConverter;
 				PRODUCT_NAME = ZundaConverter;
 				SDKROOT = macosx;
-				SWIFT_VERSION = 5.9;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -390,12 +418,12 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.beryu.ZundaConverter;
 				PRODUCT_NAME = ZundaConverter;
 				SDKROOT = macosx;
-				SWIFT_VERSION = 5.9;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};

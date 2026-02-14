@@ -1,11 +1,23 @@
 import AppKit
+import Combine
 import SwiftUI
 
 final class StatusBarController {
     private var statusItem: NSStatusItem?
+    private var cancellable: AnyCancellable?
 
     init() {
         setupStatusBar()
+        
+        // Rebuild menu when conversion mode changes so checkmarks update.
+        // .dropFirst() skips the initial value (already handled by setupStatusBar).
+        // .receive(on:) ensures menu updates happen on the next run loop tick.
+        cancellable = SettingsStore.shared.$conversionMode
+            .dropFirst()
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.rebuildMenu()
+            }
     }
 
     private func setupStatusBar() {
@@ -15,27 +27,46 @@ final class StatusBarController {
         button.image = NSImage(systemSymbolName: "bubble.left.fill", accessibilityDescription: "ZundaConverter")
         button.image?.size = NSSize(width: 18, height: 18)
 
+        rebuildMenu()
+    }
+
+    private func rebuildMenu() {
         let menu = NSMenu()
 
-        // Conversion mode
+        // === Conversion mode submenu ===
         let modeItem = NSMenuItem(title: "変換モード", action: nil, keyEquivalent: "")
         let modeSubmenu = NSMenu()
 
-        let ruleBasedItem = NSMenuItem(
-            title: "ルールベース（高速）",
-            action: #selector(selectRuleBasedMode),
-            keyEquivalent: ""
-        )
-        ruleBasedItem.target = self
-        ruleBasedItem.state = SettingsStore.shared.conversionMode == .ruleBased ? .on : .off
-        modeSubmenu.addItem(ruleBasedItem)
+        for mode in ConversionMode.allCases {
+            let item = NSMenuItem(
+                title: mode.displayName,
+                action: #selector(selectMode(_:)),
+                keyEquivalent: ""
+            )
+            item.target = self
+            item.representedObject = mode.rawValue
+            item.state = (SettingsStore.shared.conversionMode == mode) ? .on : .off
+            
+            // Show warning icon if AI mode is not available
+            if mode == .ai {
+                if #available(macOS 26, *) {
+                    if !LLMConverter.shared.isAvailable {
+                        item.title = "\(mode.displayName) ⚠️"
+                    }
+                } else {
+                    item.title = "\(mode.displayName) ⚠️"
+                }
+            }
+            
+            modeSubmenu.addItem(item)
+        }
 
         modeItem.submenu = modeSubmenu
         menu.addItem(modeItem)
 
         menu.addItem(NSMenuItem.separator())
 
-        // Settings
+        // === Settings ===
         let settingsItem = NSMenuItem(
             title: "設定...",
             action: #selector(openSettings),
@@ -46,7 +77,7 @@ final class StatusBarController {
 
         menu.addItem(NSMenuItem.separator())
 
-        // Quit
+        // === Quit ===
         let quitItem = NSMenuItem(
             title: "ZundaConverter を終了",
             action: #selector(NSApplication.terminate(_:)),
@@ -57,17 +88,13 @@ final class StatusBarController {
         statusItem?.menu = menu
     }
 
-    @objc private func selectRuleBasedMode() {
-        SettingsStore.shared.conversionMode = .ruleBased
+    @objc private func selectMode(_ sender: NSMenuItem) {
+        guard let rawValue = sender.representedObject as? String,
+              let mode = ConversionMode(rawValue: rawValue) else { return }
+        SettingsStore.shared.conversionMode = mode
     }
 
     @objc private func openSettings() {
-        NSApp.activate(ignoringOtherApps: true)
-        // Open the Settings window (SwiftUI Settings scene)
-        if #available(macOS 14.0, *) {
-            NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
-        } else {
-            NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
-        }
+        SettingsWindowController.shared.showSettings()
     }
 }

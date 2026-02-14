@@ -17,42 +17,74 @@ struct SettingsView: View {
                     Label("プレビュー", systemImage: "eye")
                 }
         }
-        .frame(width: 520, height: 400)
+        .frame(width: 520, height: 540)
     }
 
     // MARK: - General Tab
 
     private var generalTab: some View {
-        Form {
-            Section("変換モード") {
-                Picker("モード", selection: $settings.conversionMode) {
-                    ForEach(ConversionMode.allCases) { mode in
-                        Text(mode.displayName).tag(mode)
+        ScrollView {
+            Form {
+                Section("変換モード") {
+                    Picker("モード", selection: $settings.conversionMode) {
+                        ForEach(ConversionMode.allCases) { mode in
+                            Text(mode.displayName).tag(mode)
+                        }
                     }
-                }
-                .pickerStyle(.radioGroup)
+                    .pickerStyle(.radioGroup)
 
-                Text(settings.conversionMode.description)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-
-            Section("一般設定") {
-                Toggle("ログイン時に起動", isOn: $settings.launchAtLogin)
-                Toggle("変換完了時に通知", isOn: $settings.showNotification)
-            }
-
-            Section("使い方") {
-                VStack(alignment: .leading, spacing: 8) {
-                    Label("テキストを選択して右クリック", systemImage: "cursorarrow.click.2")
-                    Text("→ サービス → 「ずんだもんに変換」を選択")
+                    Text(settings.conversionMode.description)
                         .font(.caption)
                         .foregroundColor(.secondary)
-                        .padding(.leading, 28)
+
+                    if settings.conversionMode == .ai {
+                        aiStatusSection
+                    }
+                }
+
+                Section("一般設定") {
+                    Toggle("ログイン時に起動", isOn: $settings.launchAtLogin)
+                    Toggle("変換完了時に通知", isOn: $settings.showNotification)
+                }
+
+                Section("ショートカット") {
+                    ShortcutRecorderView()
+                    
+                    if !AccessibilityHelper.shared.isTrusted {
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack {
+                                Image(systemName: "exclamationmark.triangle.fill")
+                                    .foregroundColor(.yellow)
+                                Text("権限が必要です")
+                                    .font(.caption)
+                                    .fontWeight(.bold)
+                            }
+                            
+                            Text("ショートカット機能を使うにはアクセシビリティ権限を許可してください。")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            
+                            Button("権限設定を開く") {
+                                AccessibilityHelper.shared.promptForPermission()
+                            }
+                            .font(.caption)
+                        }
+                        .padding(.vertical, 4)
+                    }
+                }
+
+                Section("使い方") {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label("テキストを選択して右クリック", systemImage: "cursorarrow.click.2")
+                        Text("→ サービス → 「ずんだもんに変換」を選択")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .padding(.leading, 28)
+                    }
                 }
             }
+            .padding()
         }
-        .padding()
     }
 
     // MARK: - Preview Tab
@@ -94,5 +126,47 @@ struct SettingsView: View {
             .keyboardShortcut(.return, modifiers: .command)
         }
         .padding()
+    }
+
+    // MARK: - AI Status Section
+
+    @ViewBuilder
+    private var aiStatusSection: some View {
+        if #available(macOS 26, *) {
+            if LLMConverter.shared.isAvailable {
+                HStack {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(.green)
+                    Text("Apple Intelligence: 利用可能")
+                        .font(.caption)
+                }
+            } else if let reason = LLMConverter.shared.unavailableReason {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundColor(.yellow)
+                        Text("Apple Intelligence が必要です")
+                            .font(.caption)
+                            .fontWeight(.bold)
+                    }
+                    Text(reason)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            }
+        } else {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.red)
+                    Text("非対応")
+                        .font(.caption)
+                        .fontWeight(.bold)
+                }
+                Text("AIモードにはmacOS 26以降が必要です。")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
     }
 }

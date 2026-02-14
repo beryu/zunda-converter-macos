@@ -3,6 +3,9 @@ import AppKit
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusBarController: StatusBarController?
     private let serviceProvider = ServiceProvider()
+    
+    // Keep reference to managers to ensure they live
+    private let shortcutManager = ShortcutManager.shared
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Hide dock icon — menu bar only app
