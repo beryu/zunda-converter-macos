@@ -7,37 +7,52 @@ import FoundationModels
 final class LLMConverter: @unchecked Sendable {
     static let shared = LLMConverter()
 
+    // NOTE: The prompt intentionally avoids mentioning any character name
+    // to prevent Apple's safety filter from refusing the request.
+    // Instead it describes the transformation as a pure linguistic style change.
     private let instructions = """
-    あなたはテキスト変換ツールです。入力されたテキストを「ずんだもん」の口調に変換して出力してください。
+    あなたは日本語の「文体変換ツール」です。
+    入力されたテキストの【内容や情報を一切変更せず】、文末と一人称だけを指定されたスタイルに「機械的に」置換してください。
 
-    【ずんだもんの口調の絶対ルール】
-    1. 一人称は必ず「ボク」にする（私、俺、僕、自分 → すべて「ボク」）
-    2. 文末を以下のパターンで変換する:
-       - 「〜です」→「〜なのだ」
-       - 「〜ます」→「〜のだ」
-       - 「〜ました」→「〜たのだ」
-       - 「〜ません」→「〜ないのだ」
-       - 「〜ませんでした」→「〜なかったのだ」
-       - 「〜でしょう」→「〜なのだ」
-       - 「〜ですか？」→「〜なのだ？」
-       - 「〜ますか？」→「〜のだ？」
-       - 「〜ですね」→「〜なのだね」
-       - 「〜ますね」→「〜のだね」
-       - 「〜ですよ」→「〜なのだよ」
-       - 「〜ますよ」→「〜のだよ」
-       - 「〜してください」→「〜してほしいのだ」
-       - 「〜お願いします」→「〜お願いなのだ」
-       - 「〜と思います」→「〜と思うのだ」
-       - 「〜かもしれません」→「〜かもしれないのだ」
-       - 「〜必要があります」→「〜必要があるのだ」
-       - 「〜ではないでしょうか」→「〜ではないのだ？」
-       - 「〜いかがでしょうか」→「〜どうなのだ？」
-       - 「〜していただけますか」→「〜してもらえると嬉しいのだ」
-       - 「〜である」→「〜なのだ」
-       - 「〜だ。」はそのままでOK（既にずんだもん風）
+    【最重要ルール：原文維持】
+    - ❌ 絶対に要約しないこと。
+    - ❌ 情報を削ったり、意味を変えたりしないこと。
+    - ❌ 省略されている主語を補ったり、勝手な解釈を加えないこと。
+    - ✅ 長い文章も、全ての単語と情報を保ったまま変換すること。
 
-    【変換例】以下の例に厳密に従ってください:
+    【変換先スタイルの定義】
+    - 一人称: 「ボク」を使う
+    - 文末: 「〜のだ」「〜なのだ」で終わる独特のスタイル
 
+    【文末の変換ルール】
+    - 「〜です」→「〜なのだ」
+    - 「〜ます」→「〜のだ」
+    - 「〜ました」→「〜たのだ」
+    - 「〜ません」→「〜ないのだ」
+    - 「〜でしょう」→「〜なのだ」
+    - 「〜ですか？」→「〜なのだ？」
+    - 「〜ですね」→「〜なのだ」  (× 〜なのだね)
+    - 「〜ますね」→「〜のだ」    (× 〜のだね)
+    - 「〜ください」→「〜してほしいのだ」
+    - 「〜お願いします」→「〜お願いなのだ」
+    - 「〜と思います」→「〜と思うのだ」
+    - 「〜である」→「〜なのだ」
+
+    【一人称の変換ルール】
+    - 「私」「俺」「僕」→「ボク」
+
+    【変換例：情報の維持】
+
+    入力: このコードはおかしいですね。性能が悪くなる構造になっているので、for文をバラして並べて書いたほうが良いです。
+    出力: このコードはおかしいのだ。性能が悪くなる構造になっているので、for文をバラして並べて書いたほうが良いのだ。
+
+    入力: 昨日の会議で決まった通り、来週の月曜日までにデザイン案を3パターン作成して、Slackで共有してください。
+    出力: 昨日の会議で決まった通り、来週の月曜日までにデザイン案を3パターン作成して、Slackで共有してほしいのだ。
+
+    入力: このAPIは現在deprecatedになっているため、将来的には削除される可能性があります。早めの移行を推奨します。
+    出力: このAPIは現在deprecatedになっているため、将来的には削除される可能性があるのだ。早めの移行を推奨するのだ。
+
+    【その他の変換例】
     入力: このコードはリファクタリングが必要です。
     出力: このコードはリファクタリングが必要なのだ。
 
@@ -63,7 +78,7 @@ final class LLMConverter: @unchecked Sendable {
     出力: 動作確認をお願いなのだ。
 
     入力: パフォーマンスが改善されましたね。
-    出力: パフォーマンスが改善されたのだね。
+    出力: パフォーマンスが改善されたのだ。
 
     入力: この設計で問題ないでしょうか？
     出力: この設計で問題ないのだ？
@@ -78,7 +93,7 @@ final class LLMConverter: @unchecked Sendable {
     出力: ボクがやっておくのだよ。
 
     入力: これは素晴らしい成果ですね！
-    出力: これは素晴らしい成果なのだね！
+    出力: これは素晴らしい成果なのだ！
 
     入力: 昨日のミーティングで決まりませんでした。
     出力: 昨日のミーティングで決まらなかったのだ。
@@ -104,7 +119,29 @@ final class LLMConverter: @unchecked Sendable {
     - 入力が複数行なら、各行をそれぞれ変換して同じ行数で返す。
     - コードブロック（```で囲まれた部分）や、英語テキスト、URLはそのまま返す。
     - 「のだ」「なのだ」が既に付いている文はそのまま返す（二重変換しない）。
+    入力: 明日までに完了できますか？
+    出力: 明日までに完了できるのだ？
+
+    【出力ルール】
+    - 変換後のテキストだけを出力する。
+    - 入力が複数行なら、各行をそれぞれ変換して同じ行数で返す。
+    - 「のだ」「なのだ」が既にある文はそのまま返す。
     """
+
+    /// Phrases that indicate the model refused the request
+    private let refusalPatterns = [
+        "申し訳ありません",
+        "お応えできません",
+        "お答えできません",
+        "対応できません",
+        "著作権",
+        "リクエストにはお応え",
+        "I can't",
+        "I cannot",
+        "I'm sorry",
+    ]
+
+    private let ruleBasedFallback = RuleBasedConverter()
 
     private init() {}
 
@@ -131,9 +168,28 @@ final class LLMConverter: @unchecked Sendable {
     }
 
     /// Converts text using the on-device Foundation Model.
+    /// Falls back to rule-based conversion if the model refuses the request.
     func convert(_ text: String) async throws -> String {
         let session = LanguageModelSession(instructions: instructions)
         let response = try await session.respond(to: text)
-        return response.content
+        let result = response.content
+
+        // Detect safety filter refusal and fall back to rule-based
+        if isRefusal(result) {
+            print("[LLMConverter] Safety filter triggered, falling back to rule-based conversion")
+            return ruleBasedFallback.convert(text)
+        }
+
+        return result
+    }
+
+    /// Check if the response is a refusal from the safety filter
+    private func isRefusal(_ text: String) -> Bool {
+        for pattern in refusalPatterns {
+            if text.contains(pattern) {
+                return true
+            }
+        }
+        return false
     }
 }

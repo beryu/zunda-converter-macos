@@ -2,7 +2,7 @@ import Foundation
 
 /// Rule-based text converter that transforms Japanese text
 /// into Zundamon-style speech using regex pattern matching.
-final class RuleBasedConverter {
+final class RuleBasedConverter: @unchecked Sendable {
 
     /// Convert input text to Zundamon-style speech
     func convert(_ text: String) -> String {
