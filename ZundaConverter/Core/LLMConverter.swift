@@ -14,10 +14,11 @@ final class LLMConverter: @unchecked Sendable {
     あなたは日本語の「文体変換ツール」です。
     入力されたテキストの【内容や情報を一切変更せず】、文末と一人称だけを指定されたスタイルに「機械的に」置換してください。
 
-    【最重要ルール：原文維持】
+    【最重要ルール：原文維持・構造維持】
     - ❌ 絶対に要約しないこと。
     - ❌ 情報を削ったり、意味を変えたりしないこと。
     - ❌ 省略されている主語を補ったり、勝手な解釈を加えないこと。
+    - ❌ 【改行を勝手に追加しないこと】。入力が2行なら出力も必ず2行にする。余計な空行を挟まない。
     - ✅ 長い文章も、全ての単語と情報を保ったまま変換すること。
 
     【変換先スタイルの定義】
@@ -41,16 +42,28 @@ final class LLMConverter: @unchecked Sendable {
     【一人称の変換ルール】
     - 「私」「俺」「僕」→「ボク」
 
-    【変換例：情報の維持】
+    【変換例：構造と情報の維持】
 
-    入力: このコードはおかしいですね。性能が悪くなる構造になっているので、for文をバラして並べて書いたほうが良いです。
-    出力: このコードはおかしいのだ。性能が悪くなる構造になっているので、for文をバラして並べて書いたほうが良いのだ。
+    入力:
+    このコードはおかしいですね。
+    性能が悪くなる構造になっているので、for文をバラして並べて書いたほうが良いです。
+
+    出力:
+    このコードはおかしいのだ。
+    性能が悪くなる構造になっているので、for文をバラして並べて書いたほうが良いのだ。
 
     入力: 昨日の会議で決まった通り、来週の月曜日までにデザイン案を3パターン作成して、Slackで共有してください。
     出力: 昨日の会議で決まった通り、来週の月曜日までにデザイン案を3パターン作成して、Slackで共有してほしいのだ。
 
-    入力: このAPIは現在deprecatedになっているため、将来的には削除される可能性があります。早めの移行を推奨します。
-    出力: このAPIは現在deprecatedになっているため、将来的には削除される可能性があるのだ。早めの移行を推奨するのだ。
+    入力:
+    このAPIは現在deprecatedになっています。
+    将来的には削除される可能性があります。
+    早めの移行を推奨します。
+
+    出力:
+    このAPIは現在deprecatedになっているのだ。
+    将来的には削除される可能性があるのだ。
+    早めの移行を推奨するのだ。
 
     【その他の変換例】
     入力: このコードはリファクタリングが必要です。
@@ -124,7 +137,7 @@ final class LLMConverter: @unchecked Sendable {
 
     【出力ルール】
     - 変換後のテキストだけを出力する。
-    - 入力が複数行なら、各行をそれぞれ変換して同じ行数で返す。
+    - 入力が複数行なら、各行をそれぞれ変換して【厳密に同じ行数】で返す。勝手に空行を挟まないこと。
     - 「のだ」「なのだ」が既にある文はそのまま返す。
     """
 
@@ -170,17 +183,47 @@ final class LLMConverter: @unchecked Sendable {
     /// Converts text using the on-device Foundation Model.
     /// Falls back to rule-based conversion if the model refuses the request.
     func convert(_ text: String) async throws -> String {
+        // Normalize input newlines to \n
+        let normalizedInput = text.replacingOccurrences(of: "\r\n", with: "\n")
+                                  .replacingOccurrences(of: "\r", with: "\n")
+        
+        // If input has multiple empty lines, we want to respect that?
+        // For now, let's just pass properly normalized text.
+        
         let session = LanguageModelSession(instructions: instructions)
-        let response = try await session.respond(to: text)
-        let result = response.content
+        let response = try await session.respond(to: normalizedInput)
+        let rawResult = response.content
 
         // Detect safety filter refusal and fall back to rule-based
-        if isRefusal(result) {
+        if isRefusal(rawResult) {
             print("[LLMConverter] Safety filter triggered, falling back to rule-based conversion")
             return ruleBasedFallback.convert(text)
         }
 
-        return result
+        // --- Post-processing for newline normalization ---
+        // often LLMs output `\n\n` instead of `\n` to separate lines.
+        // We force compact the newlines to match the dense input style.
+        
+        var cleanResult = rawResult
+            // 1. Remove Markdown block markers if any (Foundation 3B sometimes adds them)
+            .replacingOccurrences(of: "```", with: "")
+        
+        // 2. Normalize newlines
+        cleanResult = cleanResult.replacingOccurrences(of: "\r\n", with: "\n")
+                                 .replacingOccurrences(of: "\r", with: "\n")
+        
+        // 3. Collapse multiple newlines into single newline
+        // regex: \n+ -> \n
+        // This fixes the "Text\n\nText" issue.
+        if let regex = try? NSRegularExpression(pattern: "\n+", options: []) {
+            let range = NSRange(cleanResult.startIndex..., in: cleanResult)
+            cleanResult = regex.stringByReplacingMatches(in: cleanResult, options: [], range: range, withTemplate: "\n")
+        }
+        
+        // 4. Trim leading/trailing whitespace
+        cleanResult = cleanResult.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        return cleanResult
     }
 
     /// Check if the response is a refusal from the safety filter
