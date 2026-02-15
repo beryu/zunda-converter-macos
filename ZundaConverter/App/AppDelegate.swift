@@ -8,6 +8,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let shortcutManager = ShortcutManager.shared
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // Debug: show app binary path
+        print("[ZundaConverter] App path: \(Bundle.main.bundlePath)")
+
         // Hide dock icon — menu bar only app
         NSApp.setActivationPolicy(.accessory)
 
