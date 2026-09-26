@@ -10,6 +10,17 @@
 2. `.dmg` を開き、`ZundaConverter.app` を Applications フォルダにドラッグ＆ドロップ
 3. アプリを起動するとメニューバーに 💬 アイコンが表示されます
 
+
+## 配布用DMGの作成
+
+XcodeからDeveloper IDで署名した`ZundaConverter.app`を`build/`に書き出します。`make package`はローカル確認用のDMGを作成します。他のMacへ配布するDMGには、ローカルのDeveloper ID Application証明書と保存済みの`notarytool`プロファイルを使い、次を実行してください。
+
+```sh
+make release-dmg SIGNING_IDENTITY='Developer ID Application: Your Name (TEAMID)' NOTARY_PROFILE=your-profile
+```
+
+コマンドが成功してから`ZundaConverter.dmg`を配布してください。
+
 ## 動作環境
 
 - macOS 26 以降

@@ -1,4 +1,12 @@
+.PHONY: package release-dmg
+
+DMG_NAME := ZundaConverter.dmg
+APP_PATH := build/ZundaConverter.app
+DMG_IDENTIFIER := com.beryu.ZundaConverter.dmg
+
 package:
+	test -d "$(APP_PATH)"
+	rm -f "$(DMG_NAME)"
 	create-dmg \
 		--volname "Zunda Converter" \
 		--app-drop-link 600 185 \
@@ -6,4 +14,14 @@ package:
 		--icon "ZundaConverter.app" 200 190 \
 		--window-pos 200 120 \
 		--window-size 800 400 \
-		ZundaConverter.dmg ./build
+		"$(DMG_NAME)" ./build
+
+release-dmg:
+	@test -n "$(SIGNING_IDENTITY)" || { echo 'Set SIGNING_IDENTITY to your Developer ID Application identity'; exit 1; }
+	@test -n "$(NOTARY_PROFILE)" || { echo 'Set NOTARY_PROFILE to a notarytool keychain profile'; exit 1; }
+	$(MAKE) package
+	codesign --sign "$(SIGNING_IDENTITY)" --timestamp --identifier "$(DMG_IDENTIFIER)" "$(DMG_NAME)"
+	codesign --verify --strict --verbose=2 "$(DMG_NAME)"
+	xcrun notarytool submit "$(DMG_NAME)" --keychain-profile "$(NOTARY_PROFILE)" --wait
+	xcrun stapler staple "$(DMG_NAME)"
+	xcrun stapler validate "$(DMG_NAME)"
